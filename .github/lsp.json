@@ -1,0 +1,11 @@
+{
+  "lspServers": {
+    "dart": {
+      "command": "dart",
+      "args": ["language-server", "--protocol=lsp"],
+      "fileExtensions": {
+        ".dart": "dart"
+      }
+    }
+  }
+}

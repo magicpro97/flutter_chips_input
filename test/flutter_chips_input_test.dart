@@ -19,7 +19,7 @@ void main() {
             maxChips: 3,
             findSuggestions: (String query) => query.isNotEmpty
                 ? allContacts
-                    .where((_) => _.toLowerCase().contains(query.toLowerCase()))
+                    .where((c) => c.toLowerCase().contains(query.toLowerCase()))
                     .toList()
                 : const [],
             onChanged: (contacts) {

@@ -1,3 +1,12 @@
+## [3.0.0] - 10-Mar-2026
+* **BREAKING**: Minimum Dart SDK raised to >=3.5.0 <4.0.0
+* Migrated to Dart 3 / Flutter 3.24+ compatibility
+* Replaced deprecated `Key? key` + `super(key: key)` with `super.key` pattern
+* Fixed `Overlay.of(context)!` — removed unnecessary null assertion (non-nullable since Flutter 3.x)
+* Updated `flutter_lints` from ^2.0.1 to ^6.0.0
+* Updated CI: `flutter format` → `dart format`, removed `dev` channel, upgraded action versions
+* Updated example app for Dart 3 compatibility
+
 ## [2.0.0] - 16-May-2022
 * Flutter 3 compatibility 
 

@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'suggestions_box_controller.dart';
-import 'text_cursor.dart';
+import 'package:flutter_chips_input/src/suggestions_box_controller.dart';
+import 'package:flutter_chips_input/src/text_cursor.dart';
 
 typedef ChipsInputSuggestions<T> = FutureOr<List<T>> Function(String query);
 typedef ChipSelected<T> = void Function(T data, bool selected);
@@ -28,7 +28,7 @@ extension on TextEditingValue {
 
 class ChipsInput<T> extends StatefulWidget {
   const ChipsInput({
-    Key? key,
+    super.key,
     this.initialValue = const [],
     this.decoration = const InputDecoration(),
     this.enabled = true,
@@ -51,8 +51,7 @@ class ChipsInput<T> extends StatefulWidget {
     this.allowChipEditing = false,
     this.focusNode,
     this.initialSuggestions,
-  })  : assert(maxChips == null || initialValue.length <= maxChips),
-        super(key: key);
+  }) : assert(maxChips == null || initialValue.length <= maxChips);
 
   final InputDecoration decoration;
   final TextStyle? textStyle;
@@ -339,10 +338,10 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
     }
   }
 
-  void _updateTextInputState({replaceText = false, putText = ''}) {
-    if (replaceText || putText != '') {
+  void _updateTextInputState({bool replaceText = false, String putText = ''}) {
+    if (replaceText || putText.isNotEmpty) {
       final updatedText =
-          String.fromCharCodes(_chips.map((_) => kObjectReplacementChar)) +
+          String.fromCharCodes(_chips.map((chip) => kObjectReplacementChar)) +
               (replaceText ? '' : _value.normalCharactersText) +
               putText;
       setState(() => _value = _value.copyWith(
@@ -459,9 +458,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
           children: <Widget>[
             GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () {
-                requestKeyboard();
-              },
+              onTap: requestKeyboard,
               child: InputDecorator(
                 decoration: widget.decoration,
                 isFocused: _effectiveFocusNode.hasFocus,

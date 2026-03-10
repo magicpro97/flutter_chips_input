@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "flutter pub get --no-example 2>/dev/null || true",
+        "timeoutSec": 60
+      }
+    ],
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/scripts/pre-tool-guard.sh",
+        "timeoutSec": 5
+      },
+      {
+        "type": "command",
+        "bash": ".github/hooks/scripts/pre-build-lint.sh",
+        "timeoutSec": 120
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/scripts/post-tool-format.sh",
+        "timeoutSec": 30
+      }
+    ]
+  }
+}
